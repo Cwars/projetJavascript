@@ -1,14 +1,19 @@
 #Rail {
-    width: 3000px;
-    margin-left: 0px;
+position: absolute;
+    width: 3600px;
+    left: -800px;
+    height: 500px;
 }
 
 #slideshow{
-    width: 600px;
+    width: 800px;
     overflow: hidden;
+    position:relative;
+    height:500px;
 }
 
-
 #Rail img {
-    width: 600px;
+	height: 100%;
+    width: 800px;
+    object-fit: cover;
 }

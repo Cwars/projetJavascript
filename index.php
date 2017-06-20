@@ -8,18 +8,28 @@
 </head>
 <body>
 
+<div>
 <div id="slideshow">
     <div id="Rail">
-        <img src="img/hunza-2211845_1920.jpg" alt="1"><!--
-        --><img src="img/hunza-2211852_1920.jpg" alt="2"><!--
-        --><img src="img/mountain-2211847_1920.jpg" alt="3"><!--
-        --><img src="img/mountain-2211861_1920.jpg" alt="4">
+<?php 
+$json = file_get_contents("https://www.skrzypczyk.fr/slideshow.php");
+$parsed_json = json_decode($json);
+
+    foreach ($parsed_json as $id => $obj) {
+        echo "<img src='".$obj->{'url'}."' alt='".$obj->{'desc'}."'>";
+    }
+?>
     </div>
+
+
+
+
 </div>
 
 <button>Précédent</button>
 <button>lecture/Pause</button>
 <button>Suivant</button>
+</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
