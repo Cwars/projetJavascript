@@ -8,28 +8,26 @@
 </head>
 <body>
 
-<div>
 <div id="slideshow">
-    <div id="Rail">
-<?php 
-$json = file_get_contents("https://www.skrzypczyk.fr/slideshow.php");
-$parsed_json = json_decode($json);
+        <ul id="slide-for">
+            <div id="rail">
+                <?php 
+                $json = file_get_contents("https://www.skrzypczyk.fr/slideshow.php");
+                $parsed_json = json_decode($json);
 
-    foreach ($parsed_json as $id => $obj) {
-        echo "<img src='".$obj->{'url'}."' alt='".$obj->{'desc'}."'>";
-    }
-?>
-    </div>
-
-
-
-
+                    foreach ($parsed_json as $id => $obj) {
+                        echo "<li>";
+                        echo "<img src='".$obj->{'url'}."' alt='".$obj->{'desc'}."'>";
+                        echo "</li>";
+                    }
+                ?>
+            </div>
+        </ul>
 </div>
 
-<button>Précédent</button>
-<button>lecture/Pause</button>
-<button>Suivant</button>
-</div>
+<button id="previous">Précédent</button>
+<button id="play">lecture/Pause</button>
+<button id="next">Suivant</button>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>

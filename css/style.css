@@ -1,19 +1,32 @@
-#Rail {
-position: absolute;
-    width: 3600px;
-    left: -800px;
-    height: 500px;
-}
-
 #slideshow{
     width: 800px;
     overflow: hidden;
     position:relative;
     height:500px;
+    padding:0;
 }
 
-#Rail img {
-	height: 100%;
+#slideshow #slide-for #rail {
+	height: 500px;
+	margin:0;
+	padding:0;
+	position: absolute;
+}
+
+#slideshow #slide-for #rail li {
+    height: 500px;
     width: 800px;
+    float: left;
+    list-style-type:none;
+}
+
+#slideshow #slide-for #rail li img {
+	height: 100%;
+    width: 100%;
     object-fit: cover;
+}
+
+#slideshow .slide-nav{
+	margin-top: 600px;
+    position: absolute;
 }
