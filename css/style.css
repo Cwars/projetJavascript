@@ -1,3 +1,8 @@
+p, div, ul , li, body {
+    margin: 0;
+    border: 0;
+}
+
 #slideshow{
     width: 800px;
     overflow: hidden;
@@ -26,7 +31,40 @@
     object-fit: cover;
 }
 
-#slideshow .slide-nav{
-	margin-top: 600px;
+#slideshow #slide-for-text #rail-text {
+    height: 500px;
+    margin:0;
+    padding:0;
     position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 800px;
+}
+
+#slideshow #slide-for-text #rail-text li {
+    width: 800px;
+    float: left;
+    list-style-type: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin-top: 300px;
+    height: 15%;
+    opacity: 0.40;
+    position: absolute;
+}
+
+#slideshow #slide-for-text #rail-text li img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+#slide-nav{
+    position: relative;
+    list-style-type: none;
+}
+
+#slide-nav li{
+    float: left;
 }
