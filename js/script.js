@@ -28,6 +28,8 @@ var speedPlay = 3000;
 var nbImg;
 var idloop;
 
+var isStop = true;
+
 function mySlider(){
 
     containerButton.children("#previous").click(precedent);
@@ -73,27 +75,33 @@ function startclone(obj,id,item){
 
 function suivant(){
 	    left = leftBase-imgWidth;
-	    rail.animate({
-			left: left
-			}, speedSlide, function() {
-			// Image animation complete.
-				$(this).children( "li:first" ).clone().appendTo( railname );
-			    $(this).children( "li:first" ).remove();
-			    $(this).css( "left", leftBase+'px');
 
-				var futurAct =  $(this).children(".active").next().attr('data-id');
-				$(this).children("[class = active]").removeClass("active");
-				$(this).children("[data-id="+futurAct+"]").addClass( "active" );
+	    if(isStop === true) {
+            isStop = false;
+            rail.animate({
+                    left: left
+                }, speedSlide, function () {
+                    // Image animation complete.
+                    $(this).children("li:first").clone().appendTo(railname);
+                    $(this).children("li:first").remove();
+                    $(this).css("left", leftBase + 'px');
 
-				//Texte animation
-				railTexte.children( "li:first" ).clone().appendTo( railnameTexte );
-				railTexte.children( "li:first" ).remove();
+                    var futurAct = $(this).children(".active").next().attr('data-id');
+                    $(this).children("[class = active]").removeClass("active");
+                    $(this).children("[data-id=" + futurAct + "]").addClass("active");
 
-				var futurActText = railTexte.children(".active").next().attr('data-id');
-				railTexte.children("[class = active]").fadeOut().removeClass("active");
-				railTexte.children("[data-id="+futurActText+"]").addClass( "active" ).fadeIn();
-			}
-		);
+                    //Texte animation
+                    railTexte.children("li:first").clone().appendTo(railnameTexte);
+                    railTexte.children("li:first").remove();
+
+                    var futurActText = railTexte.children(".active").next().attr('data-id');
+                    railTexte.children("[class = active]").fadeOut().removeClass("active");
+                    railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
+
+                isStop = true;
+            	}
+            );
+	    }
 }
 
 function precedent(){
@@ -109,9 +117,17 @@ function precedent(){
 				var futurAct = $(this).children(".active").prev().attr('data-id');
 				$(this).children("[class = active]").removeClass("active");
 				$(this).children("[data-id="+futurAct+"]").addClass( "active" );
+
+				//Texte animation
+				railTexte.children("li:last").clone().prependTo(railnameTexte);
+				railTexte.children("li:last").remove();
+
+				var futurActText = railTexte.children(".active").prev().attr('data-id');
+				railTexte.children("[class = active]").fadeOut().removeClass("active");
+				railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
 			}
 		);
-    railTexte.animate(
+    /*railTexte.animate(
         speedSlide, function() {
             //Texte animation
             $(this).children("li:last").clone().prependTo(railnameTexte);
@@ -120,7 +136,7 @@ function precedent(){
             var futurActText = $(this).children(".active").prev().attr('data-id');
             $(this).children("[class = active]").hide().removeClass("active");
             $(this).children("[data-id=" + futurActText + "]").addClass("active").show();
-        });
+        });*/
 
 	}
 
