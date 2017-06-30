@@ -5,13 +5,15 @@
     <title>Slideshow</title>
     <meta name ="Slideshow" content="Slideshow">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 </head>
 <body>
-
+<h1>Le slider de nos rêves</h1>
 <div id="slideshow">
         <ul id="slide-for">
             <div id="rail">
-                <?php 
+                <?php
                 $json = file_get_contents("https://www.skrzypczyk.fr/slideshow.php");
                 $parsed_json = json_decode($json);
 
@@ -45,10 +47,10 @@
 </div>-->
 
 <div id="button-control">
-    <button id="previous">Précédent</button>
-    <button id="play">Lecture</button>
-    <button id="pause">Pause</button>
-    <button id="next">Suivant</button>
+    <button id="previous"><i class="fa fa-backward" aria-hidden="true"></i></button>
+    <button id="play"><i class="fa fa-play" aria-hidden="true"></i></button>
+    <button id="pause"><i class="fa fa-pause" aria-hidden="true"></i></button>
+    <button id="next"><i class="fa fa-forward" aria-hidden="true"></i></button>
 </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
