@@ -58,6 +58,7 @@ function start(){
     startObj(railTexte,railnameTexte,"li:last");
 
 }
+
 function startObj(obj,id,item){
     obj.children("li").attr( "data-id", function( arr ) {
         return arr;
@@ -153,7 +154,7 @@ function pause(){
 }
 
 function count() {
-	nbImg = rail.children( "li" ).length;
+	nbImg = rail.children("li").length;
 }
 
 function createButtonDots() {
