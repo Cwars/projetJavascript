@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 // Tous les id des div nécesaire aux sliders
+=======
+
+$(document).ready(function() {
+    start();
+    mySlider();
+});
+
+>>>>>>> origin/master
 var containerName = "#slideshow";
 var liste = "#slide-for";
 var railname = "#rail";
@@ -94,14 +103,21 @@ function startObj(obj,id,item){
 
     obj.children("[data-id=0]").addClass( "active" );
 }
+<<<<<<< HEAD
 
 // Clone et remove
+=======
+// Démarrage donne un attribu à toutes les images -> data-id
+// Data-id = 0 -> donne une class active
+>>>>>>> origin/master
 function startclone(obj,id,item){
     obj.children( item ).clone().prependTo(id);
     obj.children( item ).remove();
 }
+// Clone la dernière image au début et la supprime
 
 function suivant(){
+<<<<<<< HEAD
 	    left = leftBase-imgWidth;
 
 	    if(isRunning === false) {
@@ -130,11 +146,36 @@ function suivant(){
                     var futurActText = railTexte.children(".active").next().attr('data-id');
                     railTexte.children("[class = active]").fadeOut().removeClass("active");
                     railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
+=======
+    left = leftBase-imgWidth;
+
+    if(isRunning === false) {
+        isRunning = true;
+        rail.animate({
+                left: left
+            }, speedSlide, function () {
+                // Image animation complete.
+                $(this).children("li:first").clone().appendTo(railname);
+                $(this).children("li:first").remove();
+                $(this).css("left", leftBase + 'px');
+
+                var futurAct = $(this).children(".active").next().attr('data-id');
+                $(this).children("[class = active]").removeClass("active");
+                $(this).children("[data-id=" + futurAct + "]").addClass("active");
+
+                //Texte animation
+                railTexte.children("li:first").clone().appendTo(railnameTexte);
+                railTexte.children("li:first").remove();
+
+                var futurActText = railTexte.children(".active").next().attr('data-id');
+                railTexte.children("[class = active]").fadeOut().removeClass("active");
+                railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
+>>>>>>> origin/master
 
                 isRunning = false;
-            	}
-            );
-	    }
+            }
+        );
+    }
 }
 
 function precedent() {
@@ -170,20 +211,24 @@ function precedent() {
             }
         );
     }
+<<<<<<< HEAD
 }
 
 function play() {
     idloop = setInterval(suivant, speedPlay);
     containerButton.children("#play").hide();
     containerButton.children("#pause").show();
+=======
+>>>>>>> origin/master
 }
 
-function pause(){
-    clearInterval(idloop);
-    containerButton.children("#pause").hide();
-    containerButton.children("#play").show();
-}
+    function play() {
+        idloop = setInterval(suivant, speedPlay);
+        containerButton.children("#play").hide();
+        containerButton.children("#pause").show();
+    }
 
+<<<<<<< HEAD
 // Permet de réccupper le nombre d'images
 function count() {
 	nbImg = rail.children("li").length;
@@ -202,13 +247,38 @@ function createButtonDots() {
 		button.appendChild(button_content);
         div.appendChild(button);
         button.onclick = dotsAction;
+=======
+    function pause(){
+        clearInterval(idloop);
+        containerButton.children("#pause").hide();
+        containerButton.children("#play").show();
     }
-	var div2 = document.getElementById("button-control");
-	var parentDiv = div2.parentNode;
 
-	parentDiv.insertBefore(div, div2);
-}
+    function count() {
+        nbImg = rail.children("li").length;
+>>>>>>> origin/master
+    }
 
+    function createButtonDots() {
+        var div = document.createElement("div");
+        div.setAttribute("id", "button-dots");
+
+        for(i=0 ; i<nbImg ; i++){
+            var button = document.createElement("button");
+            button.setAttribute( "data-id", i);
+            button.setAttribute("id", "dots");
+            var button_content = document.createTextNode(i);
+            button.appendChild(button_content);
+            div.appendChild(button);
+            button.onclick = dotsAction;
+        }
+        var div2 = document.getElementById("button-control");
+        var parentDiv = div2.parentNode;
+
+        parentDiv.insertBefore(div, div2);
+    }
+
+<<<<<<< HEAD
 // Récupère le data-id de la classe active
 // Récupère le data-id du boutton enclenché
 // Fais la différence et effectue plusieurs fois la fonction suivant ou précendent
@@ -216,20 +286,30 @@ function dotsAction(){
 	if($(this).attr('class') !== "active"){
 	   var dotsActive = rail.children(".active").attr('data-id');
 	   var dotsClick = $(this).attr('data-id');
+=======
+>>>>>>> origin/master
 
-	   var diff = dotsClick - dotsActive;
-	   if (diff>0){
-			for(var i = 0; i< diff; i++){
-                isRunning = false;
-				suivant();
+// Puces
+
+    function dotsAction(){
+        if($(this).attr('class') !== "active"){
+            var dotsActive = rail.children(".active").attr('data-id');
+            var dotsClick = $(this).attr('data-id');
+            // Prend la data-id de la class active et celui du bouton appuyé
+            // Fait la différence
+            // Plusieurs fois suivant ou précédent
+            var diff = dotsClick - dotsActive;
+            if (diff>0){
+                for(var i = 0; i< diff; i++){
+                    isRunning = false;
+                    suivant();
+                }
+            }else{
+                for( i = 0; i> diff; i--){
+                    isRunning = false;
+                    precedent();
+                }
             }
-	   }else{
-           for( i = 0; i> diff; i--){
-               isRunning = false;
-           		precedent();
-           }
-	   }
+        }
     }
-}
-
 
