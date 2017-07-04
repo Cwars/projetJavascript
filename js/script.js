@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Tous les id des div nécesaire aux sliders
 =======
 
@@ -8,57 +9,40 @@ $(document).ready(function() {
 });
 
 >>>>>>> origin/master
-var containerName = "#slideshow";
-var liste = "#slide-for";
-var railname = "#rail";
-var listeTexte = "#slide-for-text";
-var railnameTexte = "#rail-text";
-var button ="#button-control";
-
-// Variable permettant de les appeller
-var container = $(containerName);
-var rail = container.children(liste).children(railname);
-var railTexte = container.children(listeTexte).children(railnameTexte);
-var containerButton = $(button);
-
-//Tailles des images
-var imgWidth = 800;
-var leftBase = -Math.abs(imgWidth);
-
-// Tailles des images pour le responsive
-$( window ).resize(function() {
-    if ($(window).width() < 840) {
-        imgWidth = 400;
-        leftBase = -Math.abs(imgWidth);
-        rail.css( "left", leftBase);
-    } else {
-        imgWidth = 800;
-        leftBase = -Math.abs(imgWidth);
-        rail.css( "left", leftBase);
-    }
-});
-
-//Vitesse des animation suivant et precendent
-var speedSlide = 1000;
-
-// Vitesse de l'animation play
-var speedPlay = 3000;
-
-//Nb d'images
-var nbImg;
-
-//ID Pour pour la fonction pause (arreter le setinterval)
-var idloop;
-
-//Booléen pour empêcher les clics répétés
-var isRunning = false;
+=======
 
 $(document).ready(function() {
 	start();
 	mySlider();
 });
 
-// Fonction pour les différents bouton
+>>>>>>> parent of ae87af1... End
+var containerName = "#slideshow";
+var liste = "#slide-for";
+var railname = "#rail";
+var container = $(containerName);
+var rail = container.children(liste).children(railname);
+
+var listeTexte = "#slide-for-text";
+var railnameTexte = "#rail-text";
+var railTexte = container.children(listeTexte).children(railnameTexte);
+
+var dot = "#button-dots";
+var containerDots = $(dot);
+
+var button ="#button-control";
+var containerButton = $(button);
+
+var imgWidth = 800;
+var leftBase = -Math.abs(imgWidth);
+var speedSlide = 1000;
+var speedPlay = 3000;
+
+var nbImg;
+var idloop;
+
+var isRunning = false;
+
 function mySlider(){
 
     containerButton.children("#previous").click(precedent);
@@ -71,11 +55,6 @@ function mySlider(){
 
 }
 
-// Compte le nb d'images
-// Création des puces
-// On donne certains parametres aux css
-// Cache le bouton "pause"
-// Clone la dernière image et derniers texte pour les mettres en 1ere postion + Les supprimer
 function start(){
     count();
     createButtonDots();
@@ -93,7 +72,6 @@ function start(){
 
 }
 
-// donne un attibut data-id et donne une classe active à data-id = 0
 function startObj(obj,id,item){
     obj.children("li").attr( "data-id", function( arr ) {
         return arr;
@@ -105,11 +83,14 @@ function startObj(obj,id,item){
 }
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 // Clone et remove
 =======
 // Démarrage donne un attribu à toutes les images -> data-id
 // Data-id = 0 -> donne une class active
 >>>>>>> origin/master
+=======
+>>>>>>> parent of ae87af1... End
 function startclone(obj,id,item){
     obj.children( item ).clone().prependTo(id);
     obj.children( item ).remove();
@@ -126,23 +107,18 @@ function suivant(){
                     left: left
                 }, speedSlide, function () {
                     // Image animation complete.
-                    //clone et remove l'image
                     $(this).children("li:first").clone().appendTo(railname);
                     $(this).children("li:first").remove();
-                    //Rétablie left du css a la bonne valeur
                     $(this).css("left", leftBase + 'px');
 
-                    //Déplace la classe active des images
                     var futurAct = $(this).children(".active").next().attr('data-id');
                     $(this).children("[class = active]").removeClass("active");
                     $(this).children("[data-id=" + futurAct + "]").addClass("active");
 
                     //Texte animation
-                    //clone et remove le texte
                     railTexte.children("li:first").clone().appendTo(railnameTexte);
                     railTexte.children("li:first").remove();
 
-                    //Déplace la classe active des textes
                     var futurActText = railTexte.children(".active").next().attr('data-id');
                     railTexte.children("[class = active]").fadeOut().removeClass("active");
                     railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
@@ -178,41 +154,52 @@ function suivant(){
     }
 }
 
-function precedent() {
-    left = 0;
-    if (isRunning === false) {
+function precedent(){
+	    left = 0;
+    if(isRunning === false) {
         isRunning = true;
         rail.animate({
                 left: left
             }, speedSlide, function () {
                 // Animation complete.
-                //clone et remove l'image
                 $(this).children("li:last").clone().prependTo(railname);
                 $(this).children("li:last").remove();
-                //Rétablie left du css a la bonne valeur
                 $(this).css("left", leftBase + 'px');
 
-                //Déplace la classe active des images
                 var futurAct = $(this).children(".active").prev().attr('data-id');
                 $(this).children("[class = active]").removeClass("active");
                 $(this).children("[data-id=" + futurAct + "]").addClass("active");
 
                 //Texte animation
-                //clone et remove le texte
                 railTexte.children("li:last").clone().prependTo(railnameTexte);
                 railTexte.children("li:last").remove();
 
-                //Déplace la classe active des textes
                 var futurActText = railTexte.children(".active").prev().attr('data-id');
                 railTexte.children("[class = active]").fadeOut().removeClass("active");
                 railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
 
-                isRunning = false;
+            isRunning = false;
             }
         );
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+
+    /*railTexte.animate(
+        speedSlide, function() {
+            //Texte animation
+            $(this).children("li:last").clone().prependTo(railnameTexte);
+            $(this).children("li:last").remove();
+
+            var futurActText = $(this).children(".active").prev().attr('data-id');
+            $(this).children("[class = active]").hide().removeClass("active");
+            $(this).children("[data-id=" + futurActText + "]").addClass("active").show();
+        });*/
+
+	}
+>>>>>>> parent of ae87af1... End
 
 function play() {
     idloop = setInterval(suivant, speedPlay);
@@ -229,12 +216,14 @@ function play() {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Permet de réccupper le nombre d'images
+=======
+>>>>>>> parent of ae87af1... End
 function count() {
 	nbImg = rail.children("li").length;
 }
 
-// Fonction ecrit en JS uniquement, permet de créer des puces et donne des attributs/classes
 function createButtonDots() {
     var div = document.createElement("div");
     div.setAttribute("id", "button-dots");
@@ -279,9 +268,12 @@ function createButtonDots() {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Récupère le data-id de la classe active
 // Récupère le data-id du boutton enclenché
 // Fais la différence et effectue plusieurs fois la fonction suivant ou précendent
+=======
+>>>>>>> parent of ae87af1... End
 function dotsAction(){
 	if($(this).attr('class') !== "active"){
 	   var dotsActive = rail.children(".active").attr('data-id');
