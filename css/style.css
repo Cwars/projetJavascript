@@ -171,4 +171,11 @@ h1  {
         top: 125px;
     }
 
+    #slideshow #slide-for #rail li {
+        height: 480px;
+        width: 400px;
+        float: left;
+        list-style-type:none;
+    }
+
 }
