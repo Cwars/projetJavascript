@@ -1,4 +1,4 @@
-// Give an id to every img in the slideshow>Rail class
+
 $(document).ready(function() {
 	start();
 	mySlider();
@@ -28,7 +28,7 @@ var speedPlay = 3000;
 var nbImg;
 var idloop;
 
-var isStop = true;
+var isRunning = false;
 
 function mySlider(){
 
@@ -77,8 +77,8 @@ function startclone(obj,id,item){
 function suivant(){
 	    left = leftBase-imgWidth;
 
-	    if(isStop === true) {
-            isStop = false;
+	    if(isRunning === false) {
+            isRunning = true;
             rail.animate({
                     left: left
                 }, speedSlide, function () {
@@ -99,7 +99,7 @@ function suivant(){
                     railTexte.children("[class = active]").fadeOut().removeClass("active");
                     railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
 
-                isStop = true;
+                isRunning = false;
             	}
             );
 	    }
@@ -107,27 +107,33 @@ function suivant(){
 
 function precedent(){
 	    left = 0;
-	    rail.animate({
-			left: left
-			}, speedSlide, function() {
-			// Animation complete.
-				$(this).children( "li:last" ).clone().prependTo( railname );
-			    $(this).children( "li:last" ).remove();
-			    $(this).css( "left", leftBase+'px');
+    if(isRunning === false) {
+        isRunning = true;
+        rail.animate({
+                left: left
+            }, speedSlide, function () {
+                // Animation complete.
+                $(this).children("li:last").clone().prependTo(railname);
+                $(this).children("li:last").remove();
+                $(this).css("left", leftBase + 'px');
 
-				var futurAct = $(this).children(".active").prev().attr('data-id');
-				$(this).children("[class = active]").removeClass("active");
-				$(this).children("[data-id="+futurAct+"]").addClass( "active" );
+                var futurAct = $(this).children(".active").prev().attr('data-id');
+                $(this).children("[class = active]").removeClass("active");
+                $(this).children("[data-id=" + futurAct + "]").addClass("active");
 
-				//Texte animation
-				railTexte.children("li:last").clone().prependTo(railnameTexte);
-				railTexte.children("li:last").remove();
+                //Texte animation
+                railTexte.children("li:last").clone().prependTo(railnameTexte);
+                railTexte.children("li:last").remove();
 
-				var futurActText = railTexte.children(".active").prev().attr('data-id');
-				railTexte.children("[class = active]").fadeOut().removeClass("active");
-				railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
-			}
-		);
+                var futurActText = railTexte.children(".active").prev().attr('data-id');
+                railTexte.children("[class = active]").fadeOut().removeClass("active");
+                railTexte.children("[data-id=" + futurActText + "]").addClass("active").fadeIn();
+
+            isRunning = false;
+            }
+        );
+    }
+
     /*railTexte.animate(
         speedSlide, function() {
             //Texte animation
@@ -184,10 +190,12 @@ function dotsAction(){
 	   var diff = dotsClick - dotsActive;
 	   if (diff>0){
 			for(var i = 0; i< diff; i++){
+                isRunning = false;
 				suivant();
-			}
+            }
 	   }else{
            for( i = 0; i> diff; i--){
+               isRunning = false;
            		precedent();
            }
 	   }
