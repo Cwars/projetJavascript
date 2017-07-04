@@ -12,9 +12,17 @@ var rail = container.children(liste).children(railname);
 var railTexte = container.children(listeTexte).children(railnameTexte);
 var containerButton = $(button);
 
+
+var imgWidth;
+var leftBase;
 //Tailles des images
-var imgWidth = 800;
-var leftBase = -Math.abs(imgWidth);
+if ($(window).width() < 840) {
+    imgWidth = 400;
+    leftBase = -Math.abs(imgWidth);
+}else{
+    imgWidth = 800;
+    leftBase = -Math.abs(imgWidth);
+}
 
 
 // Tailles des images pour le responsive
@@ -215,7 +223,7 @@ function count() {
             var dotsActive = rail.children(".active").attr('data-id');
             var dotsClick = $(this).attr('data-id');
             var diff = dotsClick - dotsActive;
-            
+
             if (diff>0){
                 for(var i = 0; i< diff; i++){
                     isRunning = false;
